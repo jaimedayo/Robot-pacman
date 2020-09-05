@@ -15,7 +15,10 @@ public class Main extends PApplet {
 	int posX,posY;
 	int pag;
 	int matX, matY;
-
+	int sec;
+	int time=0;
+	int cont=0;
+	int cont1=0;
 	public void settings() {
 		size(800, 550);
 	}
@@ -46,7 +49,8 @@ public class Main extends PApplet {
 	}
 
 	public void draw() {
-		
+		sec= second();
+	
 		switch(pag) {
 		case 0:
 			
@@ -57,6 +61,19 @@ public class Main extends PApplet {
 			
 			
 			image(back2, 0, 0);
+			  if(sec > time) {
+				  time=sec;
+				 cont++;
+			  }
+			  if(sec>60) {
+				  sec =0;
+			  }
+			  if(cont>=60) {cont1++;}
+			  noStroke();
+		
+			  fill(210);
+			  textSize(32);
+			  text(cont1 + ":"+ cont, 60, 237);
 			
 			
 			//matix
@@ -78,8 +95,16 @@ public class Main extends PApplet {
 			break;
 		case 2:
 			image(back3, 0, 0);
+			 fill(210);
+			  textSize(40);
+			text(cont1 + ":"+ cont, 460, 255);
 			break;
 		case 3:
+			background(20);
+			
+				
+			
+				
 			break;
 		case 4:
 			break;
