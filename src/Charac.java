@@ -7,4 +7,5 @@ public class Charac {
 		this.posX = posX;
 		this.posY = posY;
 	}
+	
 }

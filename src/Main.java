@@ -2,6 +2,8 @@ import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
 
+
+
 import controlP5.*;
 
 public class Main extends PApplet {
@@ -26,6 +28,8 @@ public class Main extends PApplet {
 	PImage guner;
 	PImage multip;
 	
+	
+	Player a;
 	
 	
 	ControlP5 cp5;
@@ -108,19 +112,23 @@ public class Main extends PApplet {
 
 	public void draw() {
 		sec= second();
-		println(pmouseY);
+		
 switch(pag) {
 		
 case 0://startscreen
 			
 			image(back1, 0, 0);
-			
+
+					
 		
 
 			break;//gamescreen
 		case 1:
 
 			image(back2, 0, 0);
+			
+			
+
 			
 			
 			//temporizador 
@@ -157,7 +165,7 @@ case 0://startscreen
 			}
 			
 			ellipse(posX,posY,40,40);
-		
+		player(a.getX(), a.getY());
 			break;
 			
 			
@@ -188,11 +196,13 @@ case 0://startscreen
 		}
 		
 	}
+	
+
 	public void mousePressed() {
 		if(mouseY>268 && mouseY<313 &&  mouseX>315 && mouseX<478 && pag==0) {
 			cp5.get("textValue").hide();
 			cp5.get("clear").hide();
-			
+			a = new Player(200,20,3,false,0,0,false);
 			
 			
 			
@@ -227,33 +237,25 @@ pag=2;}
 		}
 		switch (keyCode) {
 		case RIGHT:
-			if(matrix[matY][matX+1]!=1) {
-				posX += 40;
-				matX++;
-			}
+			a.move(3);
+			
 			break;
 		case LEFT:
-			if(matrix[matY][matX-1]!=1) {
-				posX -= 40;
-				matX--;
-			}
+			a.move(2);
 			break;
 		case UP:
-			if(matrix[matY-1][matX]!=1) {
-				posY -= 40;
-				matY--;
-			}
+			a.move(0);
 			break;
 		case DOWN:
-			if(matrix[matY+1][matX]!=1) {
-				posY += 40;
-				matY++;
-			}
+			a.move(1);
 			break;
 		default:
 			break;
 		}
 	}
+	
+	//drawing section
+	
 	public void wall(int x, int y) {
 		image(wood, x, y,64,64);
 	}
