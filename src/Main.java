@@ -145,11 +145,11 @@ case 0://startscreen
 					if(matrix[j][i] == 0) {
 						fill(255);
 					}else if (matrix[j][i] == 1) {
-						fill(0);
+						wall((i*64+136), (j*64-45));
 					}else {
 						fill(255,0,0);
 					}
-					rect((i*64+136),(j*64-45),64,64);
+					
 				}
 			}
 			
@@ -250,6 +250,9 @@ pag=2;}
 		default:
 			break;
 		}
+	}
+	public void wall(int x, int y) {
+		image(wood, x, y,64,64);
 	}
 	public void clear() {
 		  cp5.get(Textfield.class,"textValue").clear();
