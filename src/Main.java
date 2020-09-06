@@ -1,5 +1,7 @@
 import processing.core.PApplet;
+import processing.core.PFont;
 import processing.core.PImage;
+import controlP5.*;
 
 public class Main extends PApplet {
 
@@ -10,6 +12,11 @@ public class Main extends PApplet {
 	PImage back2;
 	PImage back3;
 	
+	ControlP5 cp5;
+
+	String textValue = "";
+
+		String text;
 	int [][] matrix; 
 	int col,row;
 	int posX,posY;
@@ -24,6 +31,27 @@ public class Main extends PApplet {
 	}
 
 	public void setup() {
+		
+		PFont font = createFont("arial",20);
+		  
+		  cp5 = new ControlP5(this);
+		                 
+		  cp5.addTextfield("textValue")
+		     .setPosition(300,155)
+		     .setSize(250,60)
+		     .setFont(createFont("arial",20))
+		     .setAutoClear(false)
+		     ;
+		       
+		  cp5.addBang("clear")
+		     .setPosition(550,155)
+		     .setSize(80,60)
+		     .getCaptionLabel().align(ControlP5.CENTER, ControlP5.CENTER)
+		     ;    
+		  
+		
+		  textFont(font);
+	
 		
 		back1 = loadImage("image/frame1.png");
 		back2 = loadImage("image/frame2.png");
@@ -51,16 +79,25 @@ public class Main extends PApplet {
 	public void draw() {
 		sec= second();
 	
-		switch(pag) {
-		case 0:
+switch(pag) {
+		
+case 0://startscreen
 			
 			image(back1, 0, 0);
+			 
 			
-			break;
+
+			
+
+
+			break;//gamescreen
 		case 1:
 			
 			
 			image(back2, 0, 0);
+			
+			
+			//temporizador 
 			  if(sec > time) {
 				  time=sec;
 				 cont++;
@@ -93,9 +130,21 @@ public class Main extends PApplet {
 			ellipse(posX,posY,40,40);
 		
 			break;
-		case 2:
-			image(back3, 0, 0);
-			 fill(210);
+			
+			
+			
+		case 2: //scorescreen
+			
+			image(back3, 0, 0);//background
+			//username
+			
+			 fill(255);
+			  text(cp5.get(Textfield.class,"textValue").getText(), 330,160);
+			 
+			  
+			  
+			//temporizador 
+			fill(210);
 			  textSize(40);
 			text(cont1 + ":"+ cont, 460, 255);
 			break;
@@ -113,7 +162,10 @@ public class Main extends PApplet {
 		
 	}
 	public void mousePressed() {
-	pag++;
+		if(mouseY>500) {
+			cp5.get("textValue").hide();
+			cp5.get("clear").hide();
+	pag++;}
 	}
 	
 	public void keyPressed() {
@@ -160,4 +212,22 @@ public class Main extends PApplet {
 			break;
 		}
 	}
+	public void clear() {
+		  cp5.get(Textfield.class,"textValue").clear();
+		}
+
+		void controlEvent(ControlEvent theEvent) {
+		  if(theEvent.isAssignableFrom(Textfield.class)) {
+		    println("controlEvent: accessing a string from controller '"
+		            +theEvent.getName()+"': "
+		            +theEvent.getStringValue()
+		            );
+		  }
+		}
+
+
+		public void input(String theText) {
+		  // automatically receives results from controller input
+		  println("a textfield event for controller 'input' : "+theText);
+		}
 }
