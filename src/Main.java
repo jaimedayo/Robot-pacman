@@ -12,6 +12,21 @@ public class Main extends PApplet {
 	PImage back1;
 	PImage back2;
 	PImage back3;
+	PImage battery;
+	PImage coin;
+	PImage enemiv;
+	PImage enemio;
+	PImage fire;
+	PImage firetrap;
+	PImage gate;
+	PImage key;
+	PImage player;
+	PImage shield;
+	PImage wood;
+	PImage guner;
+	PImage multip;
+	
+	
 	
 	ControlP5 cp5;
 
@@ -57,6 +72,20 @@ public class Main extends PApplet {
 		back1 = loadImage("image/frame1.png");
 		back2 = loadImage("image/frame2.png");
 		back3 = loadImage("image/frame3.png");
+		battery = loadImage("image/battery.png");
+		coin = loadImage("image/coin.png");
+		enemio = loadImage("image/enenmio.png");
+		enemiv = loadImage("image/enemiv.png");
+		fire = loadImage("image/fire.png");
+		firetrap = loadImage("image/firetrap.png");
+		gate = loadImage("image/gate.png");
+		guner = loadImage("image/guner.png");
+		key = loadImage("image/key.png");
+		multip = loadImage("image/multip.png");
+		player = loadImage("image/player.png");
+		shield = loadImage("image/shield.png");
+		wood = loadImage("image/wood.png");
+		
 		col     = 11;
 		row     = 10;
 		posX = 200;
@@ -79,22 +108,18 @@ public class Main extends PApplet {
 
 	public void draw() {
 		sec= second();
-	
+		println(pmouseY);
 switch(pag) {
 		
 case 0://startscreen
 			
 			image(back1, 0, 0);
-			 
 			
-
-			
-
+		
 
 			break;//gamescreen
 		case 1:
-			
-			
+
 			image(back2, 0, 0);
 			
 			
@@ -107,7 +132,7 @@ case 0://startscreen
 				  sec =0;
 			  }
 			  if(cont>=60) {cont1++;}
-			  noStroke();
+			
 		
 			  fill(210);
 			  textSize(32);
@@ -161,11 +186,26 @@ case 0://startscreen
 		
 	}
 	public void mousePressed() {
-		if(mouseY>500) {
+		if(mouseY>268 && mouseY<313 &&  mouseX>315 && mouseX<478 && pag==0) {
 			cp5.get("textValue").hide();
 			cp5.get("clear").hide();
-	pag++;}
-	}
+			
+			
+			
+			
+	pag=1;}
+	
+		if(mouseY>350 && mouseY<394 &&  mouseX>315 && mouseX<478 && pag==2) {
+		
+		
+pag=0;}
+	if(mouseY>350 && mouseY<394 &&  mouseX>315 && mouseX<478 && pag==0) {
+		cp5.get("textValue").hide();
+		cp5.get("clear").hide();
+		
+pag=2;}
+
+}
 	
 	public void keyPressed() {
 		
