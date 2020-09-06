@@ -93,15 +93,15 @@ public class Main extends PApplet {
 		matX = 1;
 		matY = 1;
 	    matrix  = new int [][]{
-	    	{1,1,1,1,1,1,1,1,1,1,1},
-			{1,0,0,2,2,2,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
-			{1,0,0,0,0,0,0,0,0,0,1},
+	    	{0,1,1,1,1,1,1,1,1,1,1},
+			{1,0,1,0,1,0,1,0,1,0,1},
+			{1,2,1,0,0,0,0,0,1,0,1},
+			{1,0,1,0,0,2,1,1,1,0,1},
+			{1,2,0,0,0,0,1,0,0,0,1},
+			{1,1,0,0,1,0,1,0,0,0,1},
+			{1,1,0,2,1,0,0,0,0,0,1},
+			{1,0,0,0,1,0,1,0,0,0,1},
+			{1,0,2,0,1,0,1,0,2,0,1},
 			{1,1,1,1,1,1,1,1,1,1,1}
 		};
 	}
@@ -146,7 +146,10 @@ case 0://startscreen
 						fill(255);
 					}else if (matrix[j][i] == 1) {
 						wall((i*64+136), (j*64-45));
-					}else {
+					}else if (matrix[j][i] == 2) {
+						firetrap((i*64+136), (j*64-45));
+					}
+					else {
 						fill(255,0,0);
 					}
 					
@@ -254,6 +257,47 @@ pag=2;}
 	public void wall(int x, int y) {
 		image(wood, x, y,64,64);
 	}
+	public void firetrap(int x, int y) {
+		image(firetrap, x, y,64,64);
+		if(sec % 3 == 0) {
+		image(fire, x, y,64,64);}
+	}
+	
+	public void player(int x, int y) {
+		image(player, x, y,64,64);
+	}
+	
+	public void battery(int x, int y) {
+		image(battery, x, y,64,64);
+	}
+	
+	public void coin(int x, int y) {
+		image(coin, x, y,64,64);
+	}
+	
+	public void enemiv(int x, int y) {
+		image(enemiv, x, y,64,64);
+	}
+	public void enemio(int x, int y) {
+		image(enemio, x, y,64,64);
+	}
+	
+	public void gate(int x, int y) {
+		image(gate, x, y,64,64);
+	}
+	
+	public void guner(int x, int y) {
+		image(guner, x, y,64,64);
+	}
+	
+	public void multip(int x, int y) {
+		image(multip, x, y,64,64);
+	}
+	public void shield(int x, int y) {
+		image(shield, x, y,64,64);
+	}
+	
+	
 	public void clear() {
 		  cp5.get(Textfield.class,"textValue").clear();
 		}

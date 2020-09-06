@@ -1,5 +1,5 @@
 
-import processing.core.PImage;
+
 public class Charac {
 	public int posX;
 	public int posY;
