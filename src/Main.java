@@ -1,6 +1,7 @@
 import processing.core.PApplet;
 import processing.core.PFont;
 import processing.core.PImage;
+
 import controlP5.*;
 
 public class Main extends PApplet {
@@ -140,9 +141,7 @@ case 0://startscreen
 			
 			 fill(255);
 			  text(cp5.get(Textfield.class,"textValue").getText(), 330,160);
-			 
-			  
-			  
+	
 			//temporizador 
 			fill(210);
 			  textSize(40);
@@ -224,8 +223,6 @@ case 0://startscreen
 		            );
 		  }
 		}
-
-
 		public void input(String theText) {
 		  // automatically receives results from controller input
 		  println("a textfield event for controller 'input' : "+theText);

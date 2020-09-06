@@ -8,5 +8,6 @@
 	<classpathentry kind="src" path="src"/>
 	<classpathentry kind="lib" path="core.jar"/>
 	<classpathentry kind="lib" path="controlP5/library/controlP5.jar"/>
+	<classpathentry kind="lib" path="library/controlP5.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
