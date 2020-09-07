@@ -39,6 +39,7 @@ public class Main extends PApplet {
 		String text;
 	int [][] matrix; 
 	int col,row;
+	
 	int posX,posY;
 	int pag;
 	int matX, matY;
@@ -46,6 +47,10 @@ public class Main extends PApplet {
 	int time=0;
 	int cont=0;
 	int cont1=0;
+	int r ;
+	int l ;
+	int p ;
+	int d ;
 	public void settings() {
 		size(800, 550);
 	}
@@ -90,29 +95,31 @@ public class Main extends PApplet {
 		shield = loadImage("image/shield.png");
 		wood = loadImage("image/wood.png");
 		
-		col     = 11;
-		row     = 10;
-		posX = 200;
-		posY = 19;
+		col  = 11;
+		row  = 10;
+		posX = 1;
+		posY = 1;
+	
+		
 		matX = 1;
 		matY = 1;
 	    matrix  = new int [][]{
-	    	{0,1,1,1,1,1,1,1,1,1,1},
-			{1,0,1,0,1,0,1,0,1,0,1},
-			{1,2,1,0,0,0,0,0,1,0,1},
-			{1,0,1,0,0,2,1,1,1,0,1},
-			{1,2,0,0,0,0,1,0,0,0,1},
-			{1,1,0,0,1,0,1,0,0,0,1},
-			{1,1,0,2,1,0,0,0,0,0,1},
-			{1,0,0,0,1,0,1,0,0,0,1},
-			{1,0,2,0,1,0,1,0,2,0,1},
-			{1,1,1,1,1,1,1,1,1,1,1}
+	    	{11,11,11,11,11,11,11,11,11,11,11},
+			{11,0,5,4,5,2,5,3,5,0,11},
+			{11,6,5,1,1,1,1,1,5,1,11},
+			{11,1,5,1,1,6,5,5,5,1,11},
+			{11,6,1,1,1,1,5,1,1,1,11},
+			{11,5,1,1,5,1,5,1,1,1,11},
+			{11,5,1,5,5,1,0,1,1,1,11},
+			{11,1,1,1,5,1,5,1,1,1,11},
+			{11,1,6,1,5,0,5,1,6,1,11},
+			{11,11,11,11,11,11,11,11,11,11,11}
 		};
 	}
 
 	public void draw() {
 		sec= second();
-		
+		println(posX,posY);
 switch(pag) {
 		
 case 0://startscreen
@@ -127,7 +134,24 @@ case 0://startscreen
 
 			image(back2, 0, 0);
 			
-			
+			//life points
+			switch(a.getLive()) {
+			case 0:
+				break;
+			case 1:
+				battery(8,75);
+				break;
+			case 2:
+				battery(8,75);
+				battery(68,75);
+				break;
+			case 3:
+				battery(8,75);
+				battery(68,75);
+				battery(128,75);
+				
+				break;
+			}
 
 			
 			
@@ -153,21 +177,62 @@ case 0://startscreen
 					if(matrix[j][i] == 0) {
 						fill(255);
 					}else if (matrix[j][i] == 1) {
-						wall((i*64+136), (j*64-45));
+						coin((i*64+136), (j*64-45));
+						
 					}else if (matrix[j][i] == 2) {
+						shield((i*64+140), (j*64-45));
+						
+					}else if (matrix[j][i] == 3) {
+						battery((i*64+146), (j*64-35));
+						
+					}else if (matrix[j][i] == 4) {
+						multip((i*64+136), (j*64-45));
+						
+					}else if (matrix[j][i] == 5) {
+						wall((i*64+136), (j*64-45));
+						
+					}else if (matrix[j][i] == 6) {
 						firetrap((i*64+136), (j*64-45));
+						
+					}else if (matrix[j][i] == 7) {
+						turret((i*64+136), (j*64-45));
+						
+					}else if (matrix[j][i] == 8) {
+						rect((i*64+136), (j*64-3),(64),(20));
+						
+					}else if (matrix[j][i] == 9) {
+						enemiv((i*64+136), (j*64-45));
+						
+					}else if (matrix[j][i] == 10) {
+						enemio((i*64+136), (j*64-45));
+						
+					}else if (matrix[j][i] == 11) {
+						
+						
+					}else if (matrix[j][i] == 12) {
+						gate((i*64+136), (j*64-45));
 					}
-					else {
+				else if (matrix[j][i] == 13) {
+					firetrapOn((i*64+136), (j*64-45));
+					
+				}else {
 						fill(255,0,0);
 					}
-					
+					if(sec%3==0&&matrix[j][i] == 6) {
+						matrix[j][i] = 13;}else{
+							if(matrix[j][i] == 13) {
+								matrix[j][i] = 6;
+						}
+						r = matrix[posY][posX+1];
+						l = matrix[posY][posX-1];
+						p = matrix[posY-1][posX];
+						d = matrix[posY+1][posX];
+					}
 				}
+					
 			}
-			
-			ellipse(posX,posY,40,40);
-		player(a.getX(), a.getY());
+			player(a.getX(),a.getY());
 			break;
-			
 			
 			
 		case 2: //scorescreen
@@ -198,11 +263,16 @@ case 0://startscreen
 	}
 	
 
+	private void turret(int i, int j) {
+		// TODO Auto-generated method stub
+		
+	}
+
 	public void mousePressed() {
 		if(mouseY>268 && mouseY<313 &&  mouseX>315 && mouseX<478 && pag==0) {
 			cp5.get("textValue").hide();
 			cp5.get("clear").hide();
-			a = new Player(200,20,3,false,0,0,false);
+			a = new Player(200,20,3,false,0,0,false,0);
 			
 			
 			
@@ -222,66 +292,187 @@ pag=2;}
 	
 	public void keyPressed() {
 		
-		switch(pag) {
-		case 0:
-			break;
-		case 1:
-			break;
-		case 2:
-			break;
-		case 3:
-			break;
-		case 4:
-			break;
-		
-		}
+	
+	
 		switch (keyCode) {
+		
+
 		case RIGHT:
-			a.move(3);
+			switch (r) {
+			case 0:
+				a.move(3);
+				posX=posX+1;
+				
+				break;
+				
+			case 1:
+				a.move(3);
+				posX=posX+1;
+				break;
+				
+			case 2:
+				a.move(3);
+				posX=posX+1;
+				break;
+				
+			case 3:
+				a.move(3);
+				posX=posX+1;
+				break;
+				
+			case 4:
+				a.move(3);
+				posX=posX+1;
+				break;
+				
+			case 6:
+				a.move(3);
+				posX=posX+1;
+				break;
+					
+			}
 			
+
 			break;
 		case LEFT:
-			a.move(2);
+			switch (l) {
+			case 0:
+				a.move(2);
+				posX=posX -1;
+				
+				break;
+				
+			case 1:
+				a.move(2);
+				posX=posX -1;
+				break;
+				
+			case 2:
+				a.move(2);
+				posX=posX -1;
+				break;
+				
+			case 3:
+				a.move(2);
+				posX=posX -1;
+				break;
+				
+			case 4:
+				a.move(2);
+				posX=posX -1;
+				break;
+				
+			case 6:
+				a.move(2);
+				posX=posX -1;
+				break;
+			}
 			break;
 		case UP:
-			a.move(0);
+			switch (p) {
+			case 0:
+				a.move(0);
+				posY=posY -1;
+				break;
+				
+			case 1:
+				a.move(0);
+				posY=posY -1;
+				break;
+				
+			case 2:
+				a.move(0);
+				posY=posY -1;
+				break;
+				
+			case 3:
+				a.move(0);
+				posY=posY -1;
+				break;
+				
+			case 4:
+				a.move(0);
+				posY=posY -1;
+				break;
+				
+			case 6:
+				a.move(0);
+				posY=posY -1;
+				break;
+			
+		}
 			break;
 		case DOWN:
-			a.move(1);
-			break;
-		default:
+			switch (d) {
+			case 0:
+				a.move(1);
+				posY=posY+1;
+				break;
+				
+			case 1:
+				a.move(1);
+				posY=posY+1;
+				break;
+				
+			case 2:
+				a.move(1);
+				posY=posY+1;
+				break;
+				
+			case 3:
+				a.move(1);
+				posY=posY+1;
+				break;
+				
+			case 4:
+				a.move(1);
+				posY=posY+1;
+				break;
+				
+			case 6:
+				a.move(1);
+				posY=posY+1;
+				break;
+		
+			}
 			break;
 		}
+		
 	}
 	
 	//drawing section
+	public void firetrapOn (int x, int y) {
+		image(firetrap, x, y,64,64);
+		image(fire, x, y,64,64);}
 	
 	public void wall(int x, int y) {
 		image(wood, x, y,64,64);
 	}
 	public void firetrap(int x, int y) {
 		image(firetrap, x, y,64,64);
-		if(sec % 3 == 0) {
-		image(fire, x, y,64,64);}
+		
 	}
 	
+	
 	public void player(int x, int y) {
-		image(player, x, y,64,64);
+		image(player, x, y,63,63);
 	}
 	
 	public void battery(int x, int y) {
-		image(battery, x, y,64,64);
+		image(battery, x, y);
 	}
 	
 	public void coin(int x, int y) {
-		image(coin, x, y,64,64);
+		
+		image(coin, x+10, y+10);
+		
 	}
 	
 	public void enemiv(int x, int y) {
-		image(enemiv, x, y,64,64);
+		image(enemiv, x, y);
 	}
 	public void enemio(int x, int y) {
-		image(enemio, x, y,64,64);
+		image(enemio, x, y);
 	}
 	
 	public void gate(int x, int y) {
@@ -293,10 +484,10 @@ pag=2;}
 	}
 	
 	public void multip(int x, int y) {
-		image(multip, x, y,64,64);
+		image(multip, x, y);
 	}
 	public void shield(int x, int y) {
-		image(shield, x, y,64,64);
+		image(shield, x, y);
 	}
 	
 	
