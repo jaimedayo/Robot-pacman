@@ -152,7 +152,14 @@ case 0://startscreen
 				
 				break;
 			}
-
+if(a.getPro()) {
+	
+	shield(80, 440);
+}
+if(a.getState()) {
+	multip(20, 440);
+	
+}
 			//score
 			fill(210);
 			  textSize(50);
@@ -249,12 +256,11 @@ case 0://startscreen
 			  text(cp5.get(Textfield.class,"textValue").getText(), 330,160);
 	
 			//temporizador 
-			fill(210);
+			fill(220);
 			  textSize(40);
 			text(cont1 + ":"+ cont, 460, 255);
 			//score
-			println(mouseY);
-			fill(210);
+
 			  textSize(50);
 			  text(a.getCoin(), 310, 255);
 			break;
@@ -282,7 +288,7 @@ case 0://startscreen
 		if(mouseY>268 && mouseY<313 &&  mouseX>315 && mouseX<478 && pag==0) {
 			cp5.get("textValue").hide();
 			cp5.get("clear").hide();
-			a = new Player(200,20,3,false,0,0,false,0);
+			a = new Player(200,20,2,false,0,0,false,0);
 			
 			
 			
@@ -324,17 +330,24 @@ pag=2;}
 				
 			case 2:
 				a.move(3);
+				a.setProtect();
 				posX=posX+1;
+				taker();
 				break;
 				
 			case 3:
 				a.move(3);
+				a.setbattery();
 				posX=posX+1;
+				taker();
+				
 				break;
 				
 			case 4:
 				a.move(3);
+				a.setState();
 				posX=posX+1;
+				taker();
 				break;
 				
 			case 6:
@@ -363,17 +376,23 @@ pag=2;}
 				
 			case 2:
 				a.move(2);
+				a.setProtect();
 				posX=posX -1;
+				taker();
 				break;
 				
 			case 3:
 				a.move(2);
+				a.setbattery();
 				posX=posX -1;
+				taker();
 				break;
 				
 			case 4:
 				a.move(2);
+				a.setState();
 				posX=posX -1;
+				taker();
 				break;
 				
 			case 6:
@@ -398,19 +417,24 @@ pag=2;}
 				
 			case 2:
 				a.move(0);
+				a.setProtect();
 				posY=posY -1;
+				taker();
 				
 				break;
 				
 			case 3:
 				a.move(0);
+				a.setbattery();
 				posY=posY -1;
-				
+				taker();
 				break;
 				
 			case 4:
 				a.move(0);
+				a.setState();
 				posY=posY -1;
+				taker();
 				break;
 				
 			case 6:
@@ -436,17 +460,23 @@ pag=2;}
 				
 			case 2:
 				a.move(1);
+				a.setProtect();
 				posY=posY+1;
+				taker();
 				break;
 				
 			case 3:
 				a.move(1);
+				a.setbattery();
 				posY=posY+1;
+				taker();
 				break;
 				
 			case 4:
 				a.move(1);
+				a.setState();
 				posY=posY+1;
+				taker();
 				break;
 				
 			case 6:

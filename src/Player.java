@@ -7,6 +7,7 @@ private int coin;
 	public int count;
 	public int countp;
 	public boolean state;
+
 	public Player(int posX, int posY,int live,boolean protect,int count,int countp,boolean state,int coin) {
 		super(posX, posY);
 		this.live=live;
@@ -24,14 +25,33 @@ private int coin;
 		}
 	public void coinObtein() {
 		if(state) {
-		this.coin=this.coin +2;}else { this.coin++;}
+		this.coin=this.coin +2;
+		
+		
+		}else { this.coin++;}
 	}
+
 	public void setState() {
 		state=true;
+			
 		
 	}
 	public void setProtect() {
 		protect=true;
+		
+		
+	}
+	public void countp() {
+		if(protect==true) {
+			countp++;
+			
+			if(countp>8) {
+				protect=false;
+			}
+		}
+	}
+	public void setbattery() {
+		live++;
 		
 	}
 
@@ -46,6 +66,12 @@ private int coin;
 public int getLive() {
 		return live;
 	}
+public boolean getState() {
+	return state;
+}
+public boolean getPro() {
+	return protect;
+}
 	}
 
 	
