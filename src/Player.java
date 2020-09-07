@@ -22,7 +22,22 @@ private int coin;
 		// TODO Auto-generated constructor stub
 		
 		}
+	public void coinObtein() {
+		if(state) {
+		this.coin=this.coin +2;}else { this.coin++;}
+	}
+	public void setState() {
+		state=true;
+		
+	}
+	public void setProtect() {
+		protect=true;
+		
+	}
 
+		public int getCoin() {
+			return this.coin;
+		}
 	public void damage() {
 		if (protect==false) {
 			live--;

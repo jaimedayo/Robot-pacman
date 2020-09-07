@@ -119,7 +119,7 @@ public class Main extends PApplet {
 
 	public void draw() {
 		sec= second();
-		println(posX,posY);
+		
 switch(pag) {
 		
 case 0://startscreen
@@ -131,7 +131,7 @@ case 0://startscreen
 
 			break;//gamescreen
 		case 1:
-
+			println(a.getCoin());
 			image(back2, 0, 0);
 			
 			//life points
@@ -153,8 +153,10 @@ case 0://startscreen
 				break;
 			}
 
-			
-			
+			//score
+			fill(210);
+			  textSize(50);
+			  text(a.getCoin(), 96, 380);
 			//temporizador 
 			  if(sec > time) {
 				  time=sec;
@@ -232,6 +234,9 @@ case 0://startscreen
 					
 			}
 			player(a.getX(),a.getY());
+			if(posX==9 && posY==1) {
+				pag=2;
+			}
 			break;
 			
 			
@@ -247,6 +252,11 @@ case 0://startscreen
 			fill(210);
 			  textSize(40);
 			text(cont1 + ":"+ cont, 460, 255);
+			//score
+			println(mouseY);
+			fill(210);
+			  textSize(50);
+			  text(a.getCoin(), 310, 255);
 			break;
 		case 3:
 			background(20);
@@ -308,6 +318,8 @@ pag=2;}
 			case 1:
 				a.move(3);
 				posX=posX+1;
+				a.coinObtein();
+				taker();
 				break;
 				
 			case 2:
@@ -345,6 +357,8 @@ pag=2;}
 			case 1:
 				a.move(2);
 				posX=posX -1;
+				a.coinObtein();
+				taker();
 				break;
 				
 			case 2:
@@ -378,16 +392,20 @@ pag=2;}
 			case 1:
 				a.move(0);
 				posY=posY -1;
+				a.coinObtein();
+				taker();
 				break;
 				
 			case 2:
 				a.move(0);
 				posY=posY -1;
+				
 				break;
 				
 			case 3:
 				a.move(0);
 				posY=posY -1;
+				
 				break;
 				
 			case 4:
@@ -412,6 +430,8 @@ pag=2;}
 			case 1:
 				a.move(1);
 				posY=posY+1;
+				a.coinObtein();
+				taker();
 				break;
 				
 			case 2:
@@ -438,6 +458,9 @@ pag=2;}
 			break;
 		}
 		
+	}
+	public void taker() {
+		 matrix[posY][posX]=0;
 	}
 	
 	//drawing section
