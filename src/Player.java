@@ -61,6 +61,8 @@ private int coin;
 	public void damage() {
 		if (protect==false) {
 			live--;
+			protect=true;
+			
 		}
 		}
 public int getLive() {

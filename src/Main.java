@@ -27,6 +27,7 @@ public class Main extends PApplet {
 	PImage wood;
 	PImage guner;
 	PImage multip;
+	PImage turret;
 	
 	
 	Player a;
@@ -100,6 +101,7 @@ Enemyh eh2;
 		player = loadImage("image/player.png");
 		shield = loadImage("image/shield.png");
 		wood = loadImage("image/wood.png");
+		turret = loadImage("image/guner.png");
 		
 		col  = 11;
 		row  = 10;
@@ -116,7 +118,7 @@ Enemyh eh2;
 			{11,1,5,1,1,6,5,5,5,1,11},
 			{11,6,1,1,1,1,5,1,1,1,11},
 			{11,5,1,1,5,1,5,1,1,1,11},
-			{11,5,1,5,5,1,0,1,1,1,11},
+			{11,5,1,5,5,1,0,1,1,7,11},
 			{11,1,1,1,5,1,5,1,1,1,11},
 			{11,1,6,1,5,0,5,1,6,1,11},
 			{11,11,11,11,11,11,11,11,11,11,11}
@@ -253,13 +255,14 @@ if(a.getState()) {
 			println(mouseY);
 			//enemies zones
 			enemio(eh1.getX(),eh1.getY());
-			enemiv(ev1.getX(),eh1.getY());
-			enemio(eh2.getX(),eh1.getY());
-			enemiv(ev2.getX(),eh1.getY());
+			enemiv(ev1.getX(),ev1.getY());
+			enemio(eh2.getX(),eh2.getY());
+			enemiv(ev2.getX(),ev2.getY());
 			
 			
 			if(matrix[eh1.getsY()][eh1.getsX()+1]==5) {
 				if(sec%2==0) {
+					
 				eh1.move(2);}else {if(matrix[eh1.getsY()][eh1.getsX()-1]==5) {
 					if(sec%2==0) {
 						eh1.move(3);
@@ -288,9 +291,21 @@ if(a.getState()) {
 				if(matrix[ev2.getsY()+1][ev1.getsX()]==5) {
 					
 				}
+			}
 			
+			if (posX==ev1.secX&&posY==ev1.secY&&sec%2==0)
+				a.damage();
+			
+			if (posX==ev2.secX&&posY==ev2.secY&&sec%2==0)
+				a.damage();
+			
+			if (posX==eh1.secX&&posY==eh1.secY&&sec%2==0)
+				a.damage();
+			
+			if (posX==eh2.secX&&posY==eh2.secY&&sec%2==0)
+				a.damage();
 			break;
-				}
+			
 			
 		case 2: //scorescreen
 			
@@ -309,35 +324,23 @@ if(a.getState()) {
 			  textSize(50);
 			  text(a.getCoin(), 310, 255);
 			break;
-		case 3:
-			background(20);
-			
-				
-			
-				
-			break;
-		case 4:
-			break;
 		
 		}
 		
 	}
 	
 
-	private void turret(int i, int j) {
-		// TODO Auto-generated method stub
-		
-	}
+	
 
 	public void mousePressed() {
 		if(mouseY>268 && mouseY<313 &&  mouseX>315 && mouseX<478 && pag==0) {
 			cp5.get("textValue").hide();
 			cp5.get("clear").hide();
 			a = new Player(200,20,2,false,0,0,false,0);
-			ev1= new Enemiv(265,210,1,1);
-			eh1= new Enemyh(325,75,1,1);
-			ev2= new Enemiv(580,210,1,1);
-			eh2= new Enemyh(580,214,1,1);
+			ev1= new Enemiv(265,280,2,5);
+			eh1= new Enemyh(325,75,3,2);
+			ev2= new Enemiv(580,210,7,4);
+			eh2= new Enemyh(580,280,7,5);
 			
 			pag=1;}
 	
@@ -549,10 +552,11 @@ pag=2;}
 		image(wood, x, y,64,64);
 	}
 	public void firetrap(int x, int y) {
-		image(firetrap, x, y,64,64);
-		
+		image(firetrap, x, y,64,64);	
 	}
-	
+	public void turret(int x, int y) {
+		image(turret, x, y,64,64);	
+	}
 	
 	public void player(int x, int y) {
 		image(player, x, y,63,63);
