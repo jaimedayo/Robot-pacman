@@ -31,6 +31,12 @@ public class Main extends PApplet {
 	
 	Player a;
 	
+Enemiv ev1;
+Enemyh eh1;
+
+Enemiv ev2;
+Enemyh eh2;
+	
 	
 	ControlP5 cp5;
 
@@ -83,7 +89,7 @@ public class Main extends PApplet {
 		back3 = loadImage("image/frame3.png");
 		battery = loadImage("image/battery.png");
 		coin = loadImage("image/coin.png");
-		enemio = loadImage("image/enenmio.png");
+		enemio = loadImage("image/enemio.png");
 		enemiv = loadImage("image/enemiv.png");
 		fire = loadImage("image/fire.png");
 		firetrap = loadImage("image/firetrap.png");
@@ -131,7 +137,7 @@ case 0://startscreen
 
 			break;//gamescreen
 		case 1:
-			println(a.getCoin());
+			
 			image(back2, 0, 0);
 			
 			//life points
@@ -244,8 +250,47 @@ if(a.getState()) {
 			if(posX==9 && posY==1) {
 				pag=2;
 			}
-			break;
+			println(mouseY);
+			//enemies zones
+			enemio(eh1.getX(),eh1.getY());
+			enemiv(ev1.getX(),eh1.getY());
+			enemio(eh2.getX(),eh1.getY());
+			enemiv(ev2.getX(),eh1.getY());
 			
+			
+			if(matrix[eh1.getsY()][eh1.getsX()+1]==5) {
+				if(sec%2==0) {
+				eh1.move(2);}else {if(matrix[eh1.getsY()][eh1.getsX()-1]==5) {
+					if(sec%2==0) {
+						eh1.move(3);
+				}
+				}}
+				if(matrix[eh2.getsY()][eh1.getsX()+1]==5) {
+					
+				}
+					
+				if(matrix[eh2.getsY()][eh1.getsX()-1]==5) {
+					
+				}
+					
+					
+		if(matrix[ev1.getsY()-1][ev1.getsX()]==5) {
+			
+		}
+						
+		if(matrix[ev1.getsY()+1][ev1.getsX()]==5) {
+			
+		}
+						
+				if(matrix[ev2.getsY()-1][ev1.getsX()]==5) {
+					
+				}
+				if(matrix[ev2.getsY()+1][ev1.getsX()]==5) {
+					
+				}
+			
+			break;
+				}
 			
 		case 2: //scorescreen
 			
@@ -289,10 +334,12 @@ if(a.getState()) {
 			cp5.get("textValue").hide();
 			cp5.get("clear").hide();
 			a = new Player(200,20,2,false,0,0,false,0);
+			ev1= new Enemiv(265,210,1,1);
+			eh1= new Enemyh(325,75,1,1);
+			ev2= new Enemiv(580,210,1,1);
+			eh2= new Enemyh(580,214,1,1);
 			
-			
-			
-	pag=1;}
+			pag=1;}
 	
 		if(mouseY>350 && mouseY<394 &&  mouseX>315 && mouseX<478 && pag==2) {
 		
